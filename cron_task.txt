@@ -1,2 +1,1 @@
-* * * * * sh/autoUpdate.sh
-* * * * * echo "hello" >> ./log.log
+@reboot /home/yi-cheng/linux_hw/sh/autoUpdate.sh

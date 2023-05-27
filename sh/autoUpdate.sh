@@ -4,7 +4,7 @@ set SCRIPT_DIR [file dirname [file normalize [info script]]]
 
 set LOG_FILE "$SCRIPT_DIR/../log/autoUpdate.log"
 
-spawn sudo sh -c "apt-get update && apt-get upgrade -y --show-progress" >> "$LOG_FILE" 2>&1
+spawn sudo sh -c "apt-get update && apt-get upgrade -y --show-progress" > "$LOG_FILE" 2>&1
 
 expect "*password*" {
 
@@ -21,5 +21,9 @@ if {[catch {wait} result]} {
 	exec tail -n 10 "$LOG_FILE"
 
 } else {
-	puts "System update complete."
+	set DATE [exec date "+%Y-%m-%d %H:%M:%S"]
+	set TEMP_FILE [open "$LOG_FILE.tmp" "w"]
+	puts $TEMP_FILE "System update complete at $DATE." 
+	close $TEMP_FILE
+	exec mv -f "$LOG_FILE.tmp" "$LOG_FILE"
 }

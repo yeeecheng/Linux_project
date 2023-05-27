@@ -1,0 +1,2 @@
+* * * * * sh/autoUpdate.sh
+* * * * * echo "hello" >> ./log.log
